@@ -1,0 +1,143 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Date{
+    private:
+    int dd,mm,yy;
+    public:
+    Date(int dd,int mm,int yy)
+    {
+        this->dd=dd;
+        this->mm=mm;
+        this->yy=yy;
+    }
+    void showDate()
+    {
+        cout << "Date : "<<dd<<"-"<<mm<<"-"<<yy;
+        cout <<"\n"<<"......................................";
+    }
+};
+class Person{
+    private:
+    string name;
+    Date dob;
+    public:
+    Person(string name,int dd,int mm,int yy):dob(dd,mm,yy)
+    {
+        this->name=name;
+    }
+    void showPerson()
+    {
+        cout <<"\n" <<"Name : "<<name<<"\n";
+       dob.showDate();
+       // cout <<"\n" <<"DOB : "<<dob;
+    }
+};
+class Employee:public Person
+{
+  public:
+  int empid;
+  int basicSal;
+  public:
+  Employee(int empid,int basicSal,string name,int dd,int mm,int yy):Person(name,dd,mm,yy)
+  {
+      this->empid=empid;
+      this->basicSal=basicSal;
+  }
+  void showEmployee()
+  {
+      cout <<"\n" <<"Employee id: "<<empid;
+      cout <<"\n" <<"basicSal : "<<basicSal;
+      showPerson();
+      
+  }
+};
+class Sm:public Employee
+{
+   private:
+   int target;
+   double commision;
+   double cpk;
+   int km;
+   double Salary;
+   public:
+   Sm(int target,double Commision,double cpk,int km,int empid,int basicSal,string name,int dd,int mm,int yy):Employee(empid,basicSal,name,dd,mm,yy)
+   {
+       this->target=target;
+       this->commision=commision;
+       this->cpk=cpk;
+       this->km=km;
+   }
+   void calSal()
+   {
+       Salary=target*0.2+basicSal+(km*cpk);
+       cout <<"Salary of Sales Manager : "<<Salary;
+       cout <<"\n"<<"Target : "<<target;
+       cout <<"\n"<<"Commision : "<<commision;
+       cout <<"\n"<<"km : "<<km;
+       cout <<"\n"<<"cpk : "<<cpk;
+       showEmployee();
+   }
+};
+class Programmer:public Employee
+{
+   private:
+   string ProjectName;
+   double cpk;
+   int km;
+   double Sal;
+   public:
+   Programmer(string ProjectName,double cpk,int km,int empid,int basicSal,string name,int dd,int mm,int yy):Employee(empid,basicSal,name,dd,mm,yy)
+   {
+       this->ProjectName=ProjectName;
+       this->cpk=cpk;
+       this->km=km;
+   }
+   void calculateSal()
+   {
+       Sal=basicSal+(km*cpk);
+       cout << "\n"<<"Project Name :"<<ProjectName;
+       cout <<"\n"<<"km : "<<km;
+       cout <<"\n"<<"cpk : "<<cpk;
+       cout <<"\n"<<"Salary of programmer : "<<Sal;
+       //calSal();
+       showEmployee();
+   }
+};
+class Admin:public Employee
+{
+ private:
+ string BunitName;
+ double Allowances;
+ double Salary2;
+ public:
+ Admin(string BunitName,double Allowances,int empid,int basicSal,string name,int dd,int mm,int yy):Employee(empid,basicSal,name,dd,mm,yy)
+   {
+       this->BunitName=BunitName;
+       this->Allowances=Allowances;
+ }
+ void calculateSalary()
+ {
+     Salary2=basicSal+Allowances;
+     cout << "\n"<<"Business Unit :"<<BunitName;
+     cout<<"\n"<<"Allowances :"<<Allowances;
+     showEmployee();
+ }
+};
+int main() {
+    // Write C++ code here
+    //std::cout << "Hello world!";
+    //Date d1(19, 04, 2002);
+    //d1.showDate();
+    //Person p1("Harathi",19,04,2002);
+    //p1.showPerson();
+    //Employee e1(18,50000,"Harathi",19,04,2002);
+    //e1.showEmployee();
+    Sm s1(100000,2500,100,500,201811,50000,"Harathi",19,04,2002);
+    s1.calSal();
+    Programmer pg1("C++",100,500,201811,50000,"Harathi",19,04,2002);
+    pg1.calculateSal();
+    Admin a1("SmartOps",1000,201811,50000,"Harathi",19,04,2002);
+    a1.calculateSalary();
+    return 0;
+}
